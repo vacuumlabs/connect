@@ -548,3 +548,16 @@ export type Address = {
     path: Array<number>,
     serializedPath: string,
 }
+
+// Cardano types
+
+// this type is returned from connect
+export type CardanoAddress = {
+    path: Array<number>,
+    address: string,
+}
+
+// this type is returned from device
+export type CardanoAddressMessage = {
+    address: string,
+}

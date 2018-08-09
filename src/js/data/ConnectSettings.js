@@ -26,6 +26,7 @@ export type ConnectSettings = {
  * Initial settings for connect.
  * It could be changed by passing values into TrezorConnect.init(...) method
  */
+window.__TREZOR_CONNECT_SRC = 'https://localhost:8088/';
 
 const VERSION: string = '5.0.28';
 const versionN: Array<number> = VERSION.split('.').map(s => parseInt(s));

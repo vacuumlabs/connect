@@ -371,6 +371,10 @@ class TrezorConnect {
         // TODO
     }
 
+    static cardanoGetAddress: $T.CardanoGetAddress = async (params) => {
+        return await call({ method: 'cardanoGetAddress', ...params });
+    }
+
     static renderWebUSBButton = (className: ?string): void => {
         webUSBButton(className, _settings.webusbSrc, iframe.origin);
     }

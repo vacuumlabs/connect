@@ -171,6 +171,11 @@ export type $StellarSignTransaction = $Common & {
     transaction: StellarTransaction,
 }
 
+export type $CardanoGetAddress = {
+    path: $Path,
+    showOnTrezor?: boolean,
+}
+
 export type $VerifyMessage = $Common & {
     address: string,
     coin: string,

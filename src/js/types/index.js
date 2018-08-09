@@ -191,5 +191,11 @@ export type StellarGetAddress = typeof F_StellarGetAddress;
 export type StellarSignTransaction = (P.$StellarSignTransaction) => Promise<R.StellarSignTransaction$>;
 export type VerifyMessage = (P.$VerifyMessage) => Promise<R.VerifyMessage$>;
 
+/* eslint-disable no-redeclare */
+declare function F_CardanoGetAddress(params: (P.$Common & P.$CardanoGetAddress)): Promise<R.CardanoGetAddress$>;
+declare function F_CardanoGetAddress(params: (P.$Common & { bundle: Array<P.$CardanoGetAddress> })): Promise<R.CardanoGetAddress$$>;
+/* eslint-enable no-redeclare */
+export type CardanoGetAddress = typeof F_CardanoGetAddress;
+
 // export * from './params';
 export * from './response';

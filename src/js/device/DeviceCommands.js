@@ -258,6 +258,18 @@ export default class DeviceCommands {
         return this.typedCall('StellarSignTx', 'StellarSignedTx', transaction);
     }
 
+    async cardanoGetAddress(address_n: Array<number>, showOnTrezor: boolean): Promise<trezor.CardanoAddress> {
+        const address: MessageResponse<trezor.CardanoAddressMessage> = await this.typedCall('CardanoGetAddress', 'CardanoAddress', {
+            address_n,
+            show_display: !!showOnTrezor,
+        });
+
+        return {
+            path: address_n,
+            address: address.message.address,
+        };
+    }
+
     async cipherKeyValue(
         address_n: Array<number>,
         key: string,

@@ -164,6 +164,16 @@ export type StellarSignTransaction$ = {
     },
 } | Unsuccessful$;
 
+export type CardanoGetAddress$ = {
+    success: true,
+    payload: CardanoAddress,
+} | Unsuccessful$;
+
+export type CardanoGetAddress$$ = {
+    success: true,
+    payload: Array<CardanoAddress>,
+} | Unsuccessful$;
+
 export type VerifyMessage$ = {
     success: true,
     payload: Success,
