@@ -698,22 +698,31 @@ const onDeviceWordHandler = async (device: Device, type: string, callback: (erro
  * @memberof Core
  */
 const onDevicePassphraseHandler = async (device: Device, callback: (response: any) => void) => {
-    // wait for popup handshake
-    await getPopupPromise().promise;
-    // request passphrase view
-    postMessage(UiMessage(UI.REQUEST_PASSPHRASE, { device: device.toMessageObject() }));
-    // wait for passphrase
+    // refi93: workaround to force passphrase insertion in CLI environment
+    if (typeof window === 'undefined') {
+        callback({
+            passphrase: "",
+            passphraseOnDevice: true,
+            cache: true,
+        });
+    } else {
+        // wait for popup handshake
+        await getPopupPromise().promise;
+        // request passphrase view
+        postMessage(UiMessage(UI.REQUEST_PASSPHRASE, { device: device.toMessageObject() }));
+        // wait for passphrase
 
-    const uiResp: UiPromiseResponse = await createUiPromise(UI.RECEIVE_PASSPHRASE, device).promise;
-    const passphrase: string = uiResp.payload.value;
-    const passphraseOnDevice: boolean = uiResp.payload.passphraseOnDevice;
-    const cache: boolean = uiResp.payload.save;
-    // send as PassphrasePromptResponse
-    callback({
-        passphrase: passphrase.normalize('NFKD'),
-        passphraseOnDevice,
-        cache,
-    });
+        const uiResp: UiPromiseResponse = await createUiPromise(UI.RECEIVE_PASSPHRASE, device).promise;
+        const passphrase: string = uiResp.payload.value;
+        const passphraseOnDevice: boolean = uiResp.payload.passphraseOnDevice;
+        const cache: boolean = uiResp.payload.save;
+        // send as PassphrasePromptResponse
+        callback({
+            passphrase: passphrase.normalize('NFKD'),
+            passphraseOnDevice,
+            cache,
+        });
+    }
 };
 
 /**
