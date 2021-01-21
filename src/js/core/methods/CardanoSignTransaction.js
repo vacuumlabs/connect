@@ -5,6 +5,7 @@ import { validateParams, getFirmwareRange } from './helpers/paramsValidator';
 import { getMiscNetwork } from '../../data/CoinInfo';
 import { validatePath } from '../../utils/pathUtils';
 import { addressParametersToProto, validateAddressParameters } from './helpers/cardanoAddressParameters';
+import { validateTokenBundle, tokenBundleToProto } from './helpers/cardanoTokens';
 
 import type {
     CardanoTxCertificate,
@@ -41,13 +42,14 @@ export default class CardanoSignTransaction extends AbstractMethod {
         validateParams(payload, [
             { name: 'inputs', type: 'array', obligatory: true },
             { name: 'outputs', type: 'array', obligatory: true },
-            { name: 'fee', type: 'string', obligatory: true },
-            { name: 'ttl', type: 'string', obligatory: true },
+            { name: 'fee', type: 'amount', obligatory: true },
+            { name: 'ttl', type: 'string'},
             { name: 'certificates', type: 'array', allowEmpty: true },
             { name: 'withdrawals', type: 'array', allowEmpty: true },
             { name: 'metadata', type: 'string' },
             { name: 'protocolMagic', type: 'number', obligatory: true },
             { name: 'networkId', type: 'number', obligatory: true },
+            { name: 'validityIntervalStart', type: 'string'},
         ]);
 
         const inputs: Array<CardanoTxInput> = payload.inputs.map(input => {
@@ -68,20 +70,27 @@ export default class CardanoSignTransaction extends AbstractMethod {
             validateParams(output, [
                 { name: 'address', type: 'string' },
                 { name: 'amount', type: 'amount', obligatory: true },
+                { name: 'token_bundle', type: 'array', allowEmpty: true},
             ]);
+
+            const result: CardanoTxOutputType = {
+                amount: output.amount,
+                token_bundle: [],
+            }
 
             if (output.addressParameters) {
                 validateAddressParameters(output.addressParameters);
-                return {
-                    address_parameters: addressParametersToProto(output.addressParameters),
-                    amount: output.amount,
-                };
+                result.address_parameters = addressParametersToProto(output.addressParameters);
             } else {
-                return {
-                    address: output.address,
-                    amount: output.amount,
-                };
+                result.address = output.address;
             }
+
+            if (output.tokenBundle) {
+                validateTokenBundle(output.tokenBundle);
+                result.token_bundle = tokenBundleToProto(output.tokenBundle);
+            }
+
+            return result;
         });
 
         let certificates: Array<CardanoTxCertificate> = [];
@@ -124,6 +133,7 @@ export default class CardanoSignTransaction extends AbstractMethod {
             metadata: payload.metadata,
             protocolMagic: payload.protocolMagic,
             networkId: payload.networkId,
+            validityIntervalStart: payload.validityIntervalStart,
         };
     }
 
@@ -138,6 +148,7 @@ export default class CardanoSignTransaction extends AbstractMethod {
             this.params.metadata,
             this.params.protocolMagic,
             this.params.networkId,
+            this.params.validityIntervalStart,
         );
 
         return {

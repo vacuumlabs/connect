@@ -63,12 +63,24 @@ export type CardanoInput = {
     prev_hash: string;
     prev_index: number;
 }
+
+export type CardanoTokenAmount = {
+    rawAssetName: string;
+    amount: string;
+}
+
+export type CardanoTokenGroup = {
+    policyId: string,
+    tokenAmounts: CardanoTokenAmount[];
+}
 export type CardanoOutput = {
     addressParameters: CardanoAddressParameters;
     amount: string;
+    tokenBundle? : CardanoTokenGroup[];
 } | {
     address: string;
     amount: string;
+    tokenBundle? : CardanoTokenGroup[];
 }
 export type CardanoCertificate = {
     type: CardanoCertificateType;
