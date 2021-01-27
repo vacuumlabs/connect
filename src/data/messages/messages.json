@@ -1907,7 +1907,7 @@
                     "name": "CardanoPoolRelayParametersType",
                     "fields": [
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "CardanoPoolRelayType",
                             "name": "type",
@@ -1951,14 +1951,14 @@
                     "name": "CardanoPoolMetadataType",
                     "fields": [
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "string",
                             "name": "url",
                             "id": 1
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "bytes",
                             "name": "hash",
@@ -1974,49 +1974,49 @@
                     "name": "CardanoPoolParametersType",
                     "fields": [
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "bytes",
                             "name": "pool_id",
                             "id": 1
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "bytes",
                             "name": "vrf_key_hash",
                             "id": 2
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "uint64",
                             "name": "pledge",
                             "id": 3
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "uint64",
                             "name": "cost",
                             "id": 4
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "uint64",
                             "name": "margin_numerator",
                             "id": 5
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "uint64",
                             "name": "margin_denominator",
                             "id": 6
                         },
                         {
-                            "rule": "optional",
+                            "rule": "required",
                             "options": {},
                             "type": "string",
                             "name": "reward_account",

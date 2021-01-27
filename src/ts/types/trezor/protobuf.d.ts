@@ -627,7 +627,7 @@ export interface CardanoTxOutput {
 export interface CardanoToken {
     asset_name_bytes: string;
     amount: string;
-};
+}
 
 export interface CardanoAssetGroup {
     policy_id: string;
