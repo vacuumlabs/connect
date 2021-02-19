@@ -2711,8 +2711,23 @@
                     "type": "bytes",
                     "name": "serialized_tx",
                     "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "expect_more_chunks",
+                    "id": 3
                 }
             ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoSignedTxAck",
+            "fields": [],
             "enums": [],
             "messages": [],
             "options": {},
@@ -11265,6 +11280,10 @@
                 {
                     "name": "MessageType_CardanoSignedTx",
                     "id": 310
+                },
+                {
+                    "name": "MessageType_CardanoSignedTxAck",
+                    "id": 311
                 },
                 {
                     "name": "MessageType_RippleGetAddress",

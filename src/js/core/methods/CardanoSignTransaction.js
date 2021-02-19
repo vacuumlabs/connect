@@ -154,9 +154,20 @@ export default class CardanoSignTransaction extends AbstractMethod {
 
         const cmd = this.device.getCommands();
         const { message } = await cmd.typedCall('CardanoSignTx', 'CardanoSignedTx', this.params);
+
+        let hash = message.tx_hash;
+        let serializedTx = message.serialized_tx;
+
+        let expectMoreChunks = !!message.expect_more_chunks;
+        while (expectMoreChunks) {
+            const { message } = await cmd.typedCall('CardanoSignedTxAck', 'CardanoSignedTx');
+            serializedTx += message.serialized_tx || "";
+            expectMoreChunks = !!message.expect_more_chunks;
+        }
+
         return {
-            hash: message.tx_hash,
-            serializedTx: message.serialized_tx,
+            hash,
+            serializedTx,
         };
     }
 }
