@@ -153,18 +153,23 @@ export default class CardanoSignTransaction extends AbstractMethod {
         this._ensureFirmwareSupportsParams();
 
         const cmd = this.device.getCommands();
-        const { message } = await cmd.typedCall('CardanoSignTx', 'CardanoSignedTx', this.params);
 
-        let hash = message.tx_hash;
-        let serializedTx = message.serialized_tx;
+        let serializedTx = '';
 
-        let expectMoreChunks = !!message.expect_more_chunks;
-        while (expectMoreChunks) {
-            const { message } = await cmd.typedCall('CardanoSignedTxAck', 'CardanoSignedTx');
-            serializedTx += message.serialized_tx || "";
-            expectMoreChunks = !!message.expect_more_chunks;
+        // $FlowIssue typedCall problem with unions in response - same as in uploadFirwmare.js
+        let { type, message } = await cmd.typedCall('CardanoSignTx', 'CardanoSignedTx|CardanoSignedTxChunk', this.params);
+        while (type === 'CardanoSignedTxChunk') {
+            serializedTx += message.signed_tx_chunk;
+            // $FlowIssue typedCall problem with unions in response - same as in uploadFirwmare.js
+            ({ type, message } = await cmd.typedCall('CardanoSignedTxChunkAck', 'CardanoSignedTx|CardanoSignedTxChunk'));
         }
 
+        // this is required for backwards compatibility for FW <= 2.3.6 when the tx was not sent in chunks yet
+        if (message.serialized_tx) {
+            serializedTx += message.serialized_tx;
+        }
+
+        const hash = message.tx_hash;
         return {
             hash,
             serializedTx,
