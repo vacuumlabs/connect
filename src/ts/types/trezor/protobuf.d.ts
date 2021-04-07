@@ -57,6 +57,15 @@ export enum CardanoPoolRelayType {
     MULTIPLE_HOST_NAME = 2,
 }
 
+export enum CardanoAuxiliaryDataType {
+    BLOB = 0,
+    TUPLE = 1,
+}
+
+export enum CardanoMetadataType {
+    CATALYST_REGISTRATION = 0,
+}
+
 export enum Enum_BackupType {
     Bip39 = 0,
     Slip39_Basic = 1,
@@ -663,6 +672,24 @@ export type CardanoTxWithdrawalType = {
     amount: number;
 };
 
+export type CardanoCatalystRegistrationParametersType = {
+    voting_public_key: string;
+    staking_path: number[];
+    reward_address_parameters: CardanoAddressParametersType;
+    nonce: number;
+};
+
+export type CardanoTxMetadataType = {
+    type: CardanoMetadataType;
+    catalyst_registration_parameters?: CardanoCatalystRegistrationParametersType;
+};
+
+export type CardanoTxAuxiliaryDataType = {
+    type: CardanoAuxiliaryDataType;
+    blob?: string;
+    metadata?: CardanoTxMetadataType;
+};
+
 // CardanoSignTx
 export type CardanoSignTx = {
     inputs: CardanoTxInputType[];
@@ -673,8 +700,8 @@ export type CardanoSignTx = {
     network_id: number;
     certificates: CardanoTxCertificateType[];
     withdrawals: CardanoTxWithdrawalType[];
-    metadata?: string;
     validity_interval_start?: number;
+    auxiliary_data?: CardanoTxAuxiliaryDataType;
 };
 
 // CardanoSignedTxChunk

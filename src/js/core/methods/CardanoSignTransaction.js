@@ -8,6 +8,7 @@ import {
     addressParametersToProto,
     validateAddressParameters,
 } from './helpers/cardanoAddressParameters';
+import { transformAuxiliaryData } from './helpers/cardanoAuxiliaryData';
 import { transformCertificate } from './helpers/cardanoCertificate';
 import { validateTokenBundle, tokenBundleToProto } from './helpers/cardanoTokens';
 import { ERRORS } from '../../constants';
@@ -27,6 +28,7 @@ const CardanoSignTransactionFeatures = Object.freeze({
     SignStakePoolRegistrationAsOwner: ['0', '2.3.5'],
     ValidityIntervalStart: ['0', '2.3.5'],
     MultiassetOutputs: ['0', '2.3.5'],
+    AuxiliaryData: ['0', '2.3.7'],
 });
 
 export default class CardanoSignTransaction extends AbstractMethod {
@@ -43,6 +45,14 @@ export default class CardanoSignTransaction extends AbstractMethod {
         this.info = 'Sign Cardano transaction';
 
         const { payload } = message;
+
+        if (payload.metadata) {
+            throw ERRORS.TypedError(
+                'Method_InvalidParameter',
+                'Metadata field has been replaced by auxiliaryData.',
+            );
+        }
+
         // validate incoming parameters
         validateParams(payload, [
             { name: 'inputs', type: 'array', obligatory: true },
@@ -51,7 +61,6 @@ export default class CardanoSignTransaction extends AbstractMethod {
             { name: 'ttl', type: 'amount' },
             { name: 'certificates', type: 'array', allowEmpty: true },
             { name: 'withdrawals', type: 'array', allowEmpty: true },
-            { name: 'metadata', type: 'string' },
             { name: 'validityIntervalStart', type: 'amount' },
             { name: 'protocolMagic', type: 'number', obligatory: true },
             { name: 'networkId', type: 'number', obligatory: true },
@@ -116,6 +125,11 @@ export default class CardanoSignTransaction extends AbstractMethod {
             });
         }
 
+        let auxiliaryData;
+        if (payload.auxiliaryData) {
+            auxiliaryData = transformAuxiliaryData(payload.auxiliaryData);
+        }
+
         this.params = {
             inputs,
             outputs,
@@ -123,10 +137,10 @@ export default class CardanoSignTransaction extends AbstractMethod {
             ttl: payload.ttl,
             certificates,
             withdrawals,
-            metadata: payload.metadata,
             validity_interval_start: payload.validityIntervalStart,
             protocol_magic: payload.protocolMagic,
             network_id: payload.networkId,
+            auxiliary_data: auxiliaryData,
         };
     }
 
@@ -157,6 +171,10 @@ export default class CardanoSignTransaction extends AbstractMethod {
                 this._ensureFeatureIsSupported('MultiassetOutputs');
             }
         });
+
+        if (params.auxiliary_data) {
+            this._ensureFeatureIsSupported('AuxiliaryData');
+        }
     }
 
     async run() {
