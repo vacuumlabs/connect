@@ -30,3 +30,12 @@ export const POOL_RELAY_TYPE = Object.freeze({
     SingleHostName: 1,
     MultipleHostName: 2,
 });
+
+export const AUXILIARY_DATA_TYPE = Object.freeze({
+    Blob: 0,
+    Tuple: 1,
+});
+
+export const METADATA_TYPE = Object.freeze({
+    CatalystRegistration: 0,
+});

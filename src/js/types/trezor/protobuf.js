@@ -63,6 +63,17 @@ const Enum_CardanoPoolRelayType = Object.freeze({
 });
 export type CardanoPoolRelayType = $Values<typeof Enum_CardanoPoolRelayType>;
 
+const Enum_CardanoAuxiliaryDataType = Object.freeze({
+    BLOB: 0,
+    TUPLE: 1,
+});
+export type CardanoAuxiliaryDataType = $Values<typeof Enum_CardanoAuxiliaryDataType>;
+
+const Enum_CardanoMetadataType = Object.freeze({
+    CATALYST_REGISTRATION: 0,
+});
+export type CardanoMetadataType = $Values<typeof Enum_CardanoMetadataType>;
+
 const Enum_BackupType = Object.freeze({
     Bip39: 0,
     Slip39_Basic: 1,
@@ -680,6 +691,24 @@ export type CardanoTxWithdrawalType = {
     amount: number,
 };
 
+export type CardanoCatalystRegistrationParametersType = {
+    voting_public_key: string,
+    staking_path: number[],
+    reward_address_parameters: CardanoAddressParametersType,
+    nonce: number,
+};
+
+export type CardanoTxMetadataType = {
+    type: CardanoMetadataType,
+    catalyst_registration_parameters?: CardanoCatalystRegistrationParametersType,
+};
+
+export type CardanoTxAuxiliaryDataType = {
+    type: CardanoAuxiliaryDataType,
+    blob?: string,
+    metadata?: CardanoTxMetadataType,
+};
+
 // CardanoSignTx
 export type CardanoSignTx = {
     inputs: CardanoTxInputType[],
@@ -690,8 +719,8 @@ export type CardanoSignTx = {
     network_id: number,
     certificates: CardanoTxCertificateType[],
     withdrawals: CardanoTxWithdrawalType[],
-    metadata?: string,
     validity_interval_start?: number,
+    auxiliary_data?: CardanoTxAuxiliaryDataType,
 };
 
 // CardanoSignedTxChunk
@@ -2072,6 +2101,9 @@ export type MessageType = {
     CardanoPoolParametersType: $Exact<CardanoPoolParametersType>,
     CardanoTxCertificateType: $Exact<CardanoTxCertificateType>,
     CardanoTxWithdrawalType: $Exact<CardanoTxWithdrawalType>,
+    CardanoCatalystRegistrationParametersType: $Exact<CardanoCatalystRegistrationParametersType>,
+    CardanoTxMetadataType: $Exact<CardanoTxMetadataType>,
+    CardanoTxAuxiliaryDataType: $Exact<CardanoTxAuxiliaryDataType>,
     CardanoSignTx: $Exact<CardanoSignTx>,
     CardanoSignedTxChunk: $Exact<CardanoSignedTxChunk>,
     CardanoSignedTxChunkAck: CardanoSignedTxChunkAck,
