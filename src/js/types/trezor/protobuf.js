@@ -63,17 +63,6 @@ const Enum_CardanoPoolRelayType = Object.freeze({
 });
 export type CardanoPoolRelayType = $Values<typeof Enum_CardanoPoolRelayType>;
 
-const Enum_CardanoAuxiliaryDataType = Object.freeze({
-    BLOB: 0,
-    TUPLE: 1,
-});
-export type CardanoAuxiliaryDataType = $Values<typeof Enum_CardanoAuxiliaryDataType>;
-
-const Enum_CardanoMetadataType = Object.freeze({
-    CATALYST_REGISTRATION: 0,
-});
-export type CardanoMetadataType = $Values<typeof Enum_CardanoMetadataType>;
-
 const Enum_BackupType = Object.freeze({
     Bip39: 0,
     Slip39_Basic: 1,
@@ -698,15 +687,9 @@ export type CardanoCatalystRegistrationParametersType = {
     nonce: number,
 };
 
-export type CardanoTxMetadataType = {
-    type: CardanoMetadataType,
-    catalyst_registration_parameters?: CardanoCatalystRegistrationParametersType,
-};
-
 export type CardanoTxAuxiliaryDataType = {
-    type: CardanoAuxiliaryDataType,
     blob?: string,
-    metadata?: CardanoTxMetadataType,
+    catalyst_registration_parameters?: CardanoCatalystRegistrationParametersType,
 };
 
 // CardanoSignTx
@@ -2102,8 +2085,7 @@ export type MessageType = {
     CardanoTxCertificateType: $Exact<CardanoTxCertificateType>,
     CardanoTxWithdrawalType: $Exact<CardanoTxWithdrawalType>,
     CardanoCatalystRegistrationParametersType: $Exact<CardanoCatalystRegistrationParametersType>,
-    CardanoTxMetadataType: $Exact<CardanoTxMetadataType>,
-    CardanoTxAuxiliaryDataType: $Exact<CardanoTxAuxiliaryDataType>,
+    CardanoTxAuxiliaryDataType: CardanoTxAuxiliaryDataType,
     CardanoSignTx: $Exact<CardanoSignTx>,
     CardanoSignedTxChunk: $Exact<CardanoSignedTxChunk>,
     CardanoSignedTxChunkAck: CardanoSignedTxChunkAck,

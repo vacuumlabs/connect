@@ -27,7 +27,7 @@ TrezorConnect.cardanoSignTransaction(params).then(function(result) {
 * `validityIntervalStart` - *optional* `String`
 * `certificates` - *optional* `Array` of [CardanoCertificate](../../src/js/types/networks/cardano.js#L123)
 * `withdrawals` - *optional* `Array` of [CardanoWithdrawal](../../src/js/types/networks/cardano.js#L130)
-* `auixiliaryData` - *optional* `[CardanoAuxiliaryData]`(../../src/js/types/networks/cardano.js#147)
+* `auixiliaryData` - *optional* [CardanoAuxiliaryData](../../src/js/types/networks/cardano.js#140)
 * `metadata` - *removed* - use `auxiliaryData` instead
 
 ### Stake pool registration certificate specifics
@@ -106,7 +106,6 @@ TrezorConnect.cardanoSignTransaction({
         }
     ],
     auxiliaryData: {
-        type: 0, // blob auxiliary data type
         blob: "a200a11864a118c843aa00ff01a119012c590100aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     },
     protocolMagic: 764824073,
@@ -209,20 +208,16 @@ TrezorConnect.cardanoSignTransaction({
     fee: "42",
     ttl: "10",
     auxiliaryData: {
-        type: 1, // tuple auxiliary data type
-        metadata: {
-            type: 0, // catalyst voting key registration metadata type
-            catalystRegistrationParameters: {
-                votingPublicKey:
-                    "1af8fa0b754ff99253d983894e63a2b09cbb56c833ba18c3384210163f63dcfc",
+        catalystRegistrationParameters: {
+            votingPublicKey:
+                "1af8fa0b754ff99253d983894e63a2b09cbb56c833ba18c3384210163f63dcfc",
+            stakingPath: "m/1852'/1815'/0'/2/0",
+            rewardAddressParameters: {
+                addressType: 0, // base address type
+                path: "m/1852'/1815'/0'/0/0",
                 stakingPath: "m/1852'/1815'/0'/2/0",
-                rewardAddressParameters: {
-                    addressType: 0, // base address type
-                    path: "m/1852'/1815'/0'/0/0",
-                    stakingPath: "m/1852'/1815'/0'/2/0",
-                },
-                nonce: 22634813,
             },
+            nonce: 22634813,
         },
     },
     protocolMagic: 764824073,
@@ -231,7 +226,7 @@ TrezorConnect.cardanoSignTransaction({
 ```
 
 ### Result
-###### [flowtype](../../src/js/types/networks/cardano.js#L167-L171)
+###### [flowtype](../../src/js/types/networks/cardano.js#L158-L162)
 ```javascript
 {
     success: true,

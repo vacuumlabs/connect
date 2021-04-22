@@ -1,8 +1,6 @@
 import {
     ADDRESS_TYPE,
-    AUXILIARY_DATA_TYPE,
     CERTIFICATE_TYPE,
-    METADATA_TYPE,
     NETWORK_IDS,
     PROTOCOL_MAGICS,
 } from '../../src/js/constants/cardano';
@@ -516,7 +514,6 @@ export default {
                 fee: FEE,
                 ttl: TTL,
                 auxiliaryData: {
-                    type: AUXILIARY_DATA_TYPE.Blob,
                     blob:
                         'a200a11864a118c843aa00ff01a119012c590100aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
                 },
@@ -545,20 +542,16 @@ export default {
                 fee: FEE,
                 ttl: TTL,
                 auxiliaryData: {
-                    type: AUXILIARY_DATA_TYPE.Tuple,
-                    metadata: {
-                        type: METADATA_TYPE.CatalystRegistration,
-                        catalystRegistrationParameters: {
-                            votingPublicKey:
-                                '1af8fa0b754ff99253d983894e63a2b09cbb56c833ba18c3384210163f63dcfc',
+                    catalystRegistrationParameters: {
+                        votingPublicKey:
+                            '1af8fa0b754ff99253d983894e63a2b09cbb56c833ba18c3384210163f63dcfc',
+                        stakingPath: "m/1852'/1815'/0'/2/0",
+                        rewardAddressParameters: {
+                            addressType: 0,
+                            path: "m/1852'/1815'/0'/0/0",
                             stakingPath: "m/1852'/1815'/0'/2/0",
-                            rewardAddressParameters: {
-                                addressType: 0,
-                                path: "m/1852'/1815'/0'/0/0",
-                                stakingPath: "m/1852'/1815'/0'/2/0",
-                            },
-                            nonce: 22634813,
                         },
+                        nonce: 22634813,
                     },
                 },
                 protocolMagic: PROTOCOL_MAGICS.mainnet,

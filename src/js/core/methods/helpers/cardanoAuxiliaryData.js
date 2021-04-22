@@ -5,12 +5,10 @@ import { validatePath } from '../../../utils/pathUtils';
 
 import type {
     CardanoTxAuxiliaryDataType,
-    CardanoTxMetadataType,
     CardanoCatalystRegistrationParametersType,
 } from '../../../types/trezor/protobuf';
 import type {
     CardanoAuxiliaryData,
-    CardanoMetadata,
     CardanoCatalystRegistrationParameters,
 } from '../../../types/networks/cardano';
 
@@ -34,45 +32,25 @@ const transformCatalystRegistrationParameters = (
     };
 };
 
-const transformMetadata = (metadata: CardanoMetadata): CardanoTxMetadataType => {
-    validateParams(metadata, [{ name: 'type', type: 'number', obligatory: true }]);
-
-    let catalystRegistrationParameters;
-    if (metadata.catalystRegistrationParameters) {
-        catalystRegistrationParameters = transformCatalystRegistrationParameters(
-            metadata.catalystRegistrationParameters,
-        );
-    }
-
-    return {
-        type: metadata.type,
-        catalyst_registration_parameters: catalystRegistrationParameters,
-    };
-};
-
 export const transformAuxiliaryData = (
     auxiliaryData: CardanoAuxiliaryData,
 ): CardanoTxAuxiliaryDataType => {
     validateParams(auxiliaryData, [
-        {
-            name: 'type',
-            type: 'number',
-            obligatory: true,
-        },
         {
             name: 'blob',
             type: 'string',
         },
     ]);
 
-    let metadata;
-    if (auxiliaryData.metadata) {
-        metadata = transformMetadata(auxiliaryData.metadata);
+    let catalystRegistrationParameters;
+    if (auxiliaryData.catalystRegistrationParameters) {
+        catalystRegistrationParameters = transformCatalystRegistrationParameters(
+            auxiliaryData.catalystRegistrationParameters,
+        );
     }
 
     return {
-        type: auxiliaryData.type,
         blob: auxiliaryData.blob,
-        metadata,
+        catalyst_registration_parameters: catalystRegistrationParameters,
     };
 };

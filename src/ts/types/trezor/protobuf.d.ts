@@ -57,15 +57,6 @@ export enum CardanoPoolRelayType {
     MULTIPLE_HOST_NAME = 2,
 }
 
-export enum CardanoAuxiliaryDataType {
-    BLOB = 0,
-    TUPLE = 1,
-}
-
-export enum CardanoMetadataType {
-    CATALYST_REGISTRATION = 0,
-}
-
 export enum Enum_BackupType {
     Bip39 = 0,
     Slip39_Basic = 1,
@@ -679,15 +670,9 @@ export type CardanoCatalystRegistrationParametersType = {
     nonce: number;
 };
 
-export type CardanoTxMetadataType = {
-    type: CardanoMetadataType;
-    catalyst_registration_parameters?: CardanoCatalystRegistrationParametersType;
-};
-
 export type CardanoTxAuxiliaryDataType = {
-    type: CardanoAuxiliaryDataType;
     blob?: string;
-    metadata?: CardanoTxMetadataType;
+    catalyst_registration_parameters?: CardanoCatalystRegistrationParametersType;
 };
 
 // CardanoSignTx

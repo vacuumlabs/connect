@@ -274,26 +274,22 @@ export const cardanoSignTransaction = async () => {
         ],
         withdrawals: [{ path: 'm/44', amount: '3003112' }],
         auxiliaryData: {
-            type: 0,
             blob: 'aaff00..',
-            metadata: {
-                type: 0,
-                catalystRegistrationParameters: {
-                    votingPublicKey: 'aaff00..',
+            catalystRegistrationParameters: {
+                votingPublicKey: 'aaff00..',
+                stakingPath: 'm/44',
+                rewardAddressParameters: {
+                    addressType: 0,
+                    path: 'm/44',
                     stakingPath: 'm/44',
-                    rewardAddressParameters: {
-                        addressType: 0,
-                        path: 'm/44',
-                        stakingPath: 'm/44',
-                        stakingKeyHash: 'aaff00..',
-                        certificatePointer: {
-                            blockIndex: 0,
-                            txIndex: 0,
-                            certificateIndex: 0,
-                        },
+                    stakingKeyHash: 'aaff00..',
+                    certificatePointer: {
+                        blockIndex: 0,
+                        txIndex: 0,
+                        certificateIndex: 0,
                     },
-                    nonce: 0,
                 },
+                nonce: 0,
             },
         },
         fee: '42',

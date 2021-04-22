@@ -4,9 +4,7 @@
 import type {
     HDNodeType,
     CardanoAddressType,
-    CardanoAuxiliaryDataType,
     CardanoCertificateType,
-    CardanoMetadataType,
     CardanoPoolRelayType,
 } from '../trezor/protobuf';
 
@@ -139,15 +137,9 @@ export type CardanoCatalystRegistrationParameters = {
     nonce: number,
 };
 
-export type CardanoMetadata = {
-    type: CardanoMetadataType,
-    catalystRegistrationParameters: CardanoCatalystRegistrationParameters,
-};
-
 export type CardanoAuxiliaryData = {
-    type: CardanoAuxiliaryDataType,
     blob?: string,
-    metadata?: CardanoMetadata,
+    catalystRegistrationParameters: CardanoCatalystRegistrationParameters,
 };
 
 export type CardanoSignTransaction = {
@@ -170,8 +162,6 @@ export type CardanoSignedTx = {
 
 export type {
     CardanoAddressType,
-    CardanoAuxiliaryDataType,
     CardanoCertificateType,
-    CardanoMetadataType,
     CardanoPoolRelayType,
 } from '../trezor/protobuf';

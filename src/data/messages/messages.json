@@ -2752,13 +2752,13 @@
                     "oneofs": {}
                 },
                 {
-                    "name": "CardanoTxMetadataType",
+                    "name": "CardanoTxAuxiliaryDataType",
                     "fields": [
                         {
-                            "rule": "required",
+                            "rule": "optional",
                             "options": {},
-                            "type": "CardanoMetadataType",
-                            "name": "type",
+                            "type": "bytes",
+                            "name": "blob",
                             "id": 1
                         },
                         {
@@ -2767,36 +2767,6 @@
                             "type": "CardanoCatalystRegistrationParametersType",
                             "name": "catalyst_registration_parameters",
                             "id": 2
-                        }
-                    ],
-                    "enums": [],
-                    "messages": [],
-                    "options": {},
-                    "oneofs": {}
-                },
-                {
-                    "name": "CardanoTxAuxiliaryDataType",
-                    "fields": [
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "CardanoAuxiliaryDataType",
-                            "name": "type",
-                            "id": 1
-                        },
-                        {
-                            "rule": "optional",
-                            "options": {},
-                            "type": "bytes",
-                            "name": "blob",
-                            "id": 2
-                        },
-                        {
-                            "rule": "optional",
-                            "options": {},
-                            "type": "CardanoTxMetadataType",
-                            "name": "metadata",
-                            "id": 3
                         }
                     ],
                     "enums": [],
@@ -10760,30 +10730,6 @@
                 {
                     "name": "MULTIPLE_HOST_NAME",
                     "id": 2
-                }
-            ],
-            "options": {}
-        },
-        {
-            "name": "CardanoAuxiliaryDataType",
-            "values": [
-                {
-                    "name": "BLOB",
-                    "id": 0
-                },
-                {
-                    "name": "TUPLE",
-                    "id": 1
-                }
-            ],
-            "options": {}
-        },
-        {
-            "name": "CardanoMetadataType",
-            "values": [
-                {
-                    "name": "CATALYST_REGISTRATION",
-                    "id": 0
                 }
             ],
             "options": {}
