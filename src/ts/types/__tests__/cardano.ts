@@ -266,6 +266,15 @@ export const cardanoSignTransaction = async () => {
     if (sign.success) {
         const { payload } = sign;
         payload.hash;
-        payload.serializedTx;
+        payload.witnesses.forEach(witness => {
+            witness.type;
+            witness.pubKey;
+            witness.signature;
+            witness.chainCode;
+        });
+        const { auxiliaryDataSupplement } = payload;
+        if (auxiliaryDataSupplement) {
+            const { type, catalystSignature } = auxiliaryDataSupplement;
+        }
     }
 };
