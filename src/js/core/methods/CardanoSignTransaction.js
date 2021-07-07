@@ -22,7 +22,11 @@ import type {
     CardanoTxSigningMode,
 } from '../../types/trezor/protobuf';
 import type { CoreMessage } from '../../types';
-import type { CardanoSignedTxData } from '../../types/networks/cardano';
+import type {
+    CardanoAuxiliaryDataSupplement,
+    CardanoSignedTxData,
+    CardanoSignedTxWitness,
+} from '../../types/networks/cardano';
 
 // todo: remove when listed firmwares become mandatory for cardanoSignTransaction
 const CardanoSignTransactionFeatures = Object.freeze({
@@ -301,7 +305,7 @@ export default class CardanoSignTransaction extends AbstractMethod {
             await typedCall('CardanoTxWithdrawal', 'CardanoTxItemAck', withdrawal);
         }
         // auxiliary data
-        let auxiliaryDataSupplement;
+        let auxiliaryDataSupplement: CardanoAuxiliaryDataSupplement;
         if (hasAuxiliaryData) {
             const { type, message } = await typedCall(
                 'CardanoTxAuxiliaryData',
@@ -310,13 +314,14 @@ export default class CardanoSignTransaction extends AbstractMethod {
             );
             if (type === 'CardanoTxAuxiliaryDataSupplement') {
                 auxiliaryDataSupplement = {
-                    ...message,
                     type: CardanoTxAuxiliaryDataSupplementType[message.type],
+                    auxiliaryDataHash: message.auxiliary_data_hash,
+                    catalystSignature: message.catalyst_signature,
                 };
             }
         }
         // witnesses
-        const witnesses = [];
+        const witnesses: CardanoSignedTxWitness[] = [];
         // eslint-disable-next-line no-restricted-syntax
         for (const path of this.params.witnessPaths) {
             const { message } = await typedCall(

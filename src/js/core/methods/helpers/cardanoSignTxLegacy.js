@@ -21,6 +21,8 @@ import type {
 } from '../../../types/networks/cardano';
 import type { CardanoSignTransactionParams } from '../CardanoSignTransaction';
 
+const METADATA_HASH_KEY = 7;
+
 const SHELLEY_WITNESSES_KEY = 0;
 const BYRON_WITNESSES_KEY = 2;
 
@@ -135,13 +137,14 @@ const _transformByronWitnesses = (deserializedWitnesses): CardanoSignedTxWitness
     });
 };
 
-const _transformAuxiliaryData = (auxiliaryData): CardanoAuxiliaryDataSupplement | void => {
+const _transformAuxiliaryData = (txBody, auxiliaryData): CardanoAuxiliaryDataSupplement | void => {
     // Legacy firmware only supported catalyst registration auxiliary data so try to parse it.
     // If it fails, then no supplement is needed.
     try {
         const [maybeCatalystRegistration] = auxiliaryData;
         return {
             type: CardanoTxAuxiliaryDataSupplementType.CATALYST_REGISTRATION_SIGNATURE,
+            auxiliaryDataHash: Buffer.from(txBody.get(METADATA_HASH_KEY)).toString('hex'),
             catalystSignature: Buffer.from(
                 maybeCatalystRegistration
                     .get(CATALYST_REGISTRATION_SIGNATURE_ENTRY_KEY)
@@ -157,13 +160,13 @@ export const legacySerializedTxToResult = (
     txHash: string,
     serializedTx: string,
 ): CardanoSignedTxData => {
-    const [, deserializedWitnesses, auxiliaryData] = cbor.decode(serializedTx);
+    const [txBody, deserializedWitnesses, auxiliaryData] = cbor.decode(serializedTx);
 
     const shelleyWitnesses = _transformShelleyWitnesses(deserializedWitnesses);
     const byronWitnesses = _transformByronWitnesses(deserializedWitnesses);
     const witnesses = shelleyWitnesses.concat(byronWitnesses);
 
-    const auxiliaryDataSupplement = _transformAuxiliaryData(auxiliaryData);
+    const auxiliaryDataSupplement = _transformAuxiliaryData(txBody, auxiliaryData);
 
     return { hash: txHash, witnesses, auxiliaryDataSupplement };
 };
