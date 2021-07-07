@@ -1726,7 +1726,8 @@
                 }
             ],
             "options": {
-                "(wire_type)": 22
+                "(wire_type)": 22,
+                "(include_in_bitcoin_only)": true
             },
             "oneofs": {}
         },
@@ -1761,7 +1762,8 @@
                 }
             ],
             "options": {
-                "(wire_type)": 22
+                "(wire_type)": 22,
+                "(include_in_bitcoin_only)": true
             },
             "oneofs": {}
         },
@@ -1779,7 +1781,8 @@
             "enums": [],
             "messages": [],
             "options": {
-                "(wire_type)": 22
+                "(wire_type)": 22,
+                "(include_in_bitcoin_only)": true
             },
             "oneofs": {}
         },
@@ -1814,7 +1817,8 @@
                 }
             ],
             "options": {
-                "(wire_type)": 22
+                "(wire_type)": 22,
+                "(include_in_bitcoin_only)": true
             },
             "oneofs": {}
         },
@@ -1849,7 +1853,8 @@
                 }
             ],
             "options": {
-                "(wire_type)": 22
+                "(wire_type)": 22,
+                "(include_in_bitcoin_only)": true
             },
             "oneofs": {}
         },
@@ -1884,7 +1889,8 @@
                 }
             ],
             "options": {
-                "(wire_type)": 22
+                "(wire_type)": 22,
+                "(include_in_bitcoin_only)": true
             },
             "oneofs": {}
         },
@@ -1996,7 +2002,9 @@
                 },
                 {
                     "rule": "optional",
-                    "options": {},
+                    "options": {
+                        "default": 0
+                    },
                     "type": "uint32",
                     "name": "fee_per_anonymity",
                     "id": 3
@@ -2297,6 +2305,635 @@
             "oneofs": {}
         },
         {
+            "name": "CardanoSignTxInit",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "CardanoTxSigningMode",
+                    "name": "signing_mode",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "protocol_magic",
+                    "id": 2
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "network_id",
+                    "id": 3
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "inputs_count",
+                    "id": 4
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "outputs_count",
+                    "id": 5
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "fee",
+                    "id": 6
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "ttl",
+                    "id": 7
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "certificates_count",
+                    "id": 8
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "withdrawals_count",
+                    "id": 9
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bool",
+                    "name": "has_auxiliary_data",
+                    "id": 10
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "validity_interval_start",
+                    "id": 11
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "witnesses_count",
+                    "id": 12
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxInput",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "prev_hash",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "prev_index",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxOutput",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "string",
+                    "name": "address",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "CardanoAddressParametersType",
+                    "name": "address_parameters",
+                    "id": 2
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "amount",
+                    "id": 3
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "asset_groups_count",
+                    "id": 4
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoAssetGroup",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "policy_id",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "tokens_count",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoToken",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "asset_name_bytes",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "amount",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoPoolOwner",
+            "fields": [
+                {
+                    "rule": "repeated",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "staking_key_path",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "staking_key_hash",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoPoolRelayParameters",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "CardanoPoolRelayType",
+                    "name": "type",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "ipv4_address",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "ipv6_address",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "string",
+                    "name": "host_name",
+                    "id": 4
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "port",
+                    "id": 5
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoPoolMetadataType",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "string",
+                    "name": "url",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "hash",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoPoolParametersType",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "pool_id",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "vrf_key_hash",
+                    "id": 2
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "pledge",
+                    "id": 3
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "cost",
+                    "id": 4
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "margin_numerator",
+                    "id": 5
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "margin_denominator",
+                    "id": 6
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "string",
+                    "name": "reward_account",
+                    "id": 7
+                },
+                {
+                    "rule": "repeated",
+                    "options": {
+                        "deprecated": true
+                    },
+                    "type": "CardanoPoolOwner",
+                    "name": "owners",
+                    "id": 8
+                },
+                {
+                    "rule": "repeated",
+                    "options": {
+                        "deprecated": true
+                    },
+                    "type": "CardanoPoolRelayParameters",
+                    "name": "relays",
+                    "id": 9
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "CardanoPoolMetadataType",
+                    "name": "metadata",
+                    "id": 10
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "owners_count",
+                    "id": 11
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "relays_count",
+                    "id": 12
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxCertificate",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "CardanoCertificateType",
+                    "name": "type",
+                    "id": 1
+                },
+                {
+                    "rule": "repeated",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "path",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "pool",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "CardanoPoolParametersType",
+                    "name": "pool_parameters",
+                    "id": 4
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxWithdrawal",
+            "fields": [
+                {
+                    "rule": "repeated",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "path",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "amount",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoCatalystRegistrationParametersType",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "voting_public_key",
+                    "id": 1
+                },
+                {
+                    "rule": "repeated",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "staking_path",
+                    "id": 2
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "CardanoAddressParametersType",
+                    "name": "reward_address_parameters",
+                    "id": 3
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "uint64",
+                    "name": "nonce",
+                    "id": 4
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxAuxiliaryData",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "CardanoCatalystRegistrationParametersType",
+                    "name": "catalyst_registration_parameters",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "hash",
+                    "id": 2
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxItemAck",
+            "fields": [],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxAuxiliaryDataSupplement",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "CardanoTxAuxiliaryDataSupplementType",
+                    "name": "type",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "auxiliary_data_hash",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "catalyst_signature",
+                    "id": 3
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxWitnessRequest",
+            "fields": [
+                {
+                    "rule": "repeated",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "path",
+                    "id": 1
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxWitnessResponse",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "CardanoTxWitnessType",
+                    "name": "type",
+                    "id": 1
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "pub_key",
+                    "id": 2
+                },
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "signature",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "chain_code",
+                    "id": 4
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxHostAck",
+            "fields": [],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoTxBodyHash",
+            "fields": [
+                {
+                    "rule": "required",
+                    "options": {},
+                    "type": "bytes",
+                    "name": "tx_hash",
+                    "id": 1
+                }
+            ],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
+            "name": "CardanoSignTxFinished",
+            "fields": [],
+            "enums": [],
+            "messages": [],
+            "options": {},
+            "oneofs": {}
+        },
+        {
             "name": "CardanoSignTx",
             "fields": [
                 {
@@ -2553,108 +3190,6 @@
                     "oneofs": {}
                 },
                 {
-                    "name": "CardanoPoolMetadataType",
-                    "fields": [
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "string",
-                            "name": "url",
-                            "id": 1
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "bytes",
-                            "name": "hash",
-                            "id": 2
-                        }
-                    ],
-                    "enums": [],
-                    "messages": [],
-                    "options": {},
-                    "oneofs": {}
-                },
-                {
-                    "name": "CardanoPoolParametersType",
-                    "fields": [
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "bytes",
-                            "name": "pool_id",
-                            "id": 1
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "bytes",
-                            "name": "vrf_key_hash",
-                            "id": 2
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "uint64",
-                            "name": "pledge",
-                            "id": 3
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "uint64",
-                            "name": "cost",
-                            "id": 4
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "uint64",
-                            "name": "margin_numerator",
-                            "id": 5
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "uint64",
-                            "name": "margin_denominator",
-                            "id": 6
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "string",
-                            "name": "reward_account",
-                            "id": 7
-                        },
-                        {
-                            "rule": "repeated",
-                            "options": {},
-                            "type": "CardanoPoolOwnerType",
-                            "name": "owners",
-                            "id": 8
-                        },
-                        {
-                            "rule": "repeated",
-                            "options": {},
-                            "type": "CardanoPoolRelayParametersType",
-                            "name": "relays",
-                            "id": 9
-                        },
-                        {
-                            "rule": "optional",
-                            "options": {},
-                            "type": "CardanoPoolMetadataType",
-                            "name": "metadata",
-                            "id": 10
-                        }
-                    ],
-                    "enums": [],
-                    "messages": [],
-                    "options": {},
-                    "oneofs": {}
-                },
-                {
                     "name": "CardanoTxCertificateType",
                     "fields": [
                         {
@@ -2715,43 +3250,6 @@
                     "oneofs": {}
                 },
                 {
-                    "name": "CardanoCatalystRegistrationParametersType",
-                    "fields": [
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "bytes",
-                            "name": "voting_public_key",
-                            "id": 1
-                        },
-                        {
-                            "rule": "repeated",
-                            "options": {},
-                            "type": "uint32",
-                            "name": "staking_path",
-                            "id": 2
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "CardanoAddressParametersType",
-                            "name": "reward_address_parameters",
-                            "id": 3
-                        },
-                        {
-                            "rule": "required",
-                            "options": {},
-                            "type": "uint64",
-                            "name": "nonce",
-                            "id": 4
-                        }
-                    ],
-                    "enums": [],
-                    "messages": [],
-                    "options": {},
-                    "oneofs": {}
-                },
-                {
                     "name": "CardanoTxAuxiliaryDataType",
                     "fields": [
                         {
@@ -2775,7 +3273,9 @@
                     "oneofs": {}
                 }
             ],
-            "options": {},
+            "options": {
+                "deprecated": true
+            },
             "oneofs": {}
         },
         {
@@ -2791,7 +3291,9 @@
             ],
             "enums": [],
             "messages": [],
-            "options": {},
+            "options": {
+                "deprecated": true
+            },
             "oneofs": {}
         },
         {
@@ -2799,7 +3301,9 @@
             "fields": [],
             "enums": [],
             "messages": [],
-            "options": {},
+            "options": {
+                "deprecated": true
+            },
             "oneofs": {}
         },
         {
@@ -2822,7 +3326,9 @@
             ],
             "enums": [],
             "messages": [],
-            "options": {},
+            "options": {
+                "deprecated": true
+            },
             "oneofs": {}
         },
         {
@@ -2942,6 +3448,20 @@
                     "type": "ButtonRequestType",
                     "name": "code",
                     "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "pages",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "page_number",
+                    "id": 3
                 }
             ],
             "enums": [
@@ -5990,7 +6510,9 @@
                             "id": 17
                         }
                     ],
-                    "options": {}
+                    "options": {
+                        "(has_bitcoin_only_values)": true
+                    }
                 }
             ],
             "messages": [],
@@ -8889,91 +9411,6 @@
             "oneofs": {}
         },
         {
-            "ref": "google.protobuf.EnumValueOptions",
-            "fields": [
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_in",
-                    "id": 50002
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_out",
-                    "id": 50003
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_debug_in",
-                    "id": 50004
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_debug_out",
-                    "id": 50005
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_tiny",
-                    "id": 50006
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_bootloader",
-                    "id": 50007
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "wire_no_fsm",
-                    "id": 50008
-                }
-            ]
-        },
-        {
-            "ref": "google.protobuf.MessageOptions",
-            "fields": [
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "unstable",
-                    "id": 50001
-                },
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "uint32",
-                    "name": "wire_type",
-                    "id": 50002
-                }
-            ]
-        },
-        {
-            "ref": "google.protobuf.FieldOptions",
-            "fields": [
-                {
-                    "rule": "optional",
-                    "options": {},
-                    "type": "bool",
-                    "name": "experimental",
-                    "id": 52001
-                }
-            ]
-        },
-        {
             "name": "RippleGetAddress",
             "fields": [
                 {
@@ -10549,6 +10986,117 @@
             ],
             "options": {},
             "oneofs": {}
+        },
+        {
+            "ref": "google.protobuf.EnumValueOptions",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_in",
+                    "id": 50002
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_out",
+                    "id": 50003
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_debug_in",
+                    "id": 50004
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_debug_out",
+                    "id": 50005
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_tiny",
+                    "id": 50006
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_bootloader",
+                    "id": 50007
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "wire_no_fsm",
+                    "id": 50008
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "bitcoin_only",
+                    "id": 60000
+                }
+            ]
+        },
+        {
+            "ref": "google.protobuf.EnumOptions",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "has_bitcoin_only_values",
+                    "id": 51001
+                }
+            ]
+        },
+        {
+            "ref": "google.protobuf.MessageOptions",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "unstable",
+                    "id": 52001
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "uint32",
+                    "name": "wire_type",
+                    "id": 52002
+                },
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "include_in_bitcoin_only",
+                    "id": 60000
+                }
+            ]
+        },
+        {
+            "ref": "google.protobuf.FieldOptions",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "options": {},
+                    "type": "bool",
+                    "name": "experimental",
+                    "id": 53001
+                }
+            ]
         }
     ],
     "enums": [
@@ -10735,6 +11283,48 @@
             "options": {}
         },
         {
+            "name": "CardanoTxAuxiliaryDataSupplementType",
+            "values": [
+                {
+                    "name": "NONE",
+                    "id": 0
+                },
+                {
+                    "name": "CATALYST_REGISTRATION_SIGNATURE",
+                    "id": 1
+                }
+            ],
+            "options": {}
+        },
+        {
+            "name": "CardanoTxSigningMode",
+            "values": [
+                {
+                    "name": "ORDINARY_TRANSACTION",
+                    "id": 0
+                },
+                {
+                    "name": "POOL_REGISTRATION_AS_OWNER",
+                    "id": 1
+                }
+            ],
+            "options": {}
+        },
+        {
+            "name": "CardanoTxWitnessType",
+            "values": [
+                {
+                    "name": "BYRON_WITNESS",
+                    "id": 0
+                },
+                {
+                    "name": "SHELLEY_WITNESS",
+                    "id": 1
+                }
+            ],
+            "options": {}
+        },
+        {
             "name": "BackupType",
             "values": [
                 {
@@ -10886,20 +11476,8 @@
                     "id": 55
                 },
                 {
-                    "name": "MessageType_SetU2FCounter",
-                    "id": 63
-                },
-                {
                     "name": "MessageType_SdProtect",
                     "id": 79
-                },
-                {
-                    "name": "MessageType_GetNextU2FCounter",
-                    "id": 80
-                },
-                {
-                    "name": "MessageType_NextU2FCounter",
-                    "id": 81
                 },
                 {
                     "name": "MessageType_ChangeWipeCode",
@@ -10924,6 +11502,18 @@
                 {
                     "name": "MessageType_RebootToBootloader",
                     "id": 87
+                },
+                {
+                    "name": "MessageType_SetU2FCounter",
+                    "id": 63
+                },
+                {
+                    "name": "MessageType_GetNextU2FCounter",
+                    "id": 80
+                },
+                {
+                    "name": "MessageType_NextU2FCounter",
+                    "id": 81
                 },
                 {
                     "name": "MessageType_Deprecated_PassphraseStateRequest",
@@ -11326,6 +11916,74 @@
                     "id": 312
                 },
                 {
+                    "name": "MessageType_CardanoTxItemAck",
+                    "id": 313
+                },
+                {
+                    "name": "MessageType_CardanoTxAuxiliaryDataSupplement",
+                    "id": 314
+                },
+                {
+                    "name": "MessageType_CardanoTxWitnessRequest",
+                    "id": 315
+                },
+                {
+                    "name": "MessageType_CardanoTxWitnessResponse",
+                    "id": 316
+                },
+                {
+                    "name": "MessageType_CardanoTxHostAck",
+                    "id": 317
+                },
+                {
+                    "name": "MessageType_CardanoTxBodyHash",
+                    "id": 318
+                },
+                {
+                    "name": "MessageType_CardanoSignTxFinished",
+                    "id": 319
+                },
+                {
+                    "name": "MessageType_CardanoSignTxInit",
+                    "id": 320
+                },
+                {
+                    "name": "MessageType_CardanoTxInput",
+                    "id": 321
+                },
+                {
+                    "name": "MessageType_CardanoTxOutput",
+                    "id": 322
+                },
+                {
+                    "name": "MessageType_CardanoAssetGroup",
+                    "id": 323
+                },
+                {
+                    "name": "MessageType_CardanoToken",
+                    "id": 324
+                },
+                {
+                    "name": "MessageType_CardanoTxCertificate",
+                    "id": 325
+                },
+                {
+                    "name": "MessageType_CardanoTxWithdrawal",
+                    "id": 326
+                },
+                {
+                    "name": "MessageType_CardanoTxAuxiliaryData",
+                    "id": 327
+                },
+                {
+                    "name": "MessageType_CardanoPoolOwner",
+                    "id": 328
+                },
+                {
+                    "name": "MessageType_CardanoPoolRelayParameters",
+                    "id": 329
+                },
+                {
                     "name": "MessageType_RippleGetAddress",
                     "id": 400
                 },
@@ -11574,7 +12232,9 @@
                     "id": 803
                 }
             ],
-            "options": {}
+            "options": {
+                "(has_bitcoin_only_values)": true
+            }
         }
     ],
     "imports": [],
