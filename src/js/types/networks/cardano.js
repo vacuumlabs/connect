@@ -166,6 +166,7 @@ export type CardanoSignedTxWitness = {
 
 export type CardanoAuxiliaryDataSupplement = {
     type: CardanoTxAuxiliaryDataSupplementType,
+    auxiliaryDataHash: string,
     catalystSignature?: string,
 };
 

@@ -274,7 +274,7 @@ export const cardanoSignTransaction = async () => {
         });
         const { auxiliaryDataSupplement } = payload;
         if (auxiliaryDataSupplement) {
-            const { type, catalystSignature } = auxiliaryDataSupplement;
+            const { type, auxiliaryDataHash, catalystSignature } = auxiliaryDataSupplement;
         }
     }
 };

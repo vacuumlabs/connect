@@ -311,6 +311,7 @@ export const cardanoSignTransaction = async () => {
         const { auxiliaryDataSupplement } = payload;
         if (auxiliaryDataSupplement) {
             auxiliaryDataSupplement.type;
+            auxiliaryDataSupplement.auxiliaryDataHash;
             auxiliaryDataSupplement.catalystSignature;
         }
     }
