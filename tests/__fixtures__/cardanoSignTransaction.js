@@ -743,6 +743,13 @@ export default {
                         chainCode: null,
                     },
                 ],
+                auxiliaryDataSupplement: {
+                    type: 1,
+                    auxiliaryDataHash:
+                        'a943e9166f1bb6d767b175384d3bd7d23645170df36fc1861fbf344135d8e120',
+                    catalystSignature:
+                        '74f27d877bbb4a5fc4f7c56869905c11f70bad0af3de24b23afaa1d024e750930f434ecc4b73e5d1723c2cb8548e8bf6098ac876487b3a6ed0891cb76994d409',
+                },
             },
             legacyResults: [
                 {
